@@ -1,0 +1,4 @@
+.hideScroll{
+    overflow: auto;
+    scrollbar-width: none; 
+}
