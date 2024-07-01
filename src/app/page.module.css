@@ -2,3 +2,7 @@
     overflow: auto;
     scrollbar-width: none; 
 }
+
+.banner{
+  background-image: url('/images/book.jpg');
+}
