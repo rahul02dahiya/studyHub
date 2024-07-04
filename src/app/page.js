@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import styles from "@/app/page.module.css";
 import Banner from "@/components/Banner";
 import BookShelf from "@/components/BookShelf";
+import Cards from "@/components/Cards";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Banner/>
       </div>
       <BookShelf/>
+      <Cards />
     </main>
   );
 }
