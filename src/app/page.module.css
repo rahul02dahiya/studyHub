@@ -1,8 +1,12 @@
-.hideScroll{
-    overflow: auto;
-    scrollbar-width: none; 
-}
+
 
 .banner{
   background-image: url('/images/book.jpg');
+}
+
+@media screen and (min-width: 480px){
+  .hideScroll{
+    overflow: auto;
+    scrollbar-width: none; 
+}
 }

@@ -4,6 +4,7 @@ import { MdShoppingCart } from "react-icons/md";
 import { Monoton } from 'next/font/google'
 
 const monoton = Monoton({subsets:['latin'], weight:'400' });
+import Link from "next/link";
 
 const Header = () => {
 
@@ -18,7 +19,9 @@ const Header = () => {
               { isLoggedIn ? <CgProfile/> : <IoLogIn/>}
           </div>
           <div id="cartBtn" className="hover:text-blue-400">
+              <Link href='/cart'>
               <MdShoppingCart/>
+              </Link>
           </div>
         </div>
     </div>
