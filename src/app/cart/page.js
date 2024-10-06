@@ -46,7 +46,7 @@ const page = () => {
   return (
     <div>
       <Navbar />
-    <div className="cart-page">
+    <div className="cart-page flex sm:flex-row flex-col">
       <div className="cart-items">
         <h2>Cart - {cartItems.length} items</h2>
         {cartItems.map(item => (

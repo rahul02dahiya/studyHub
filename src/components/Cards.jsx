@@ -1,6 +1,8 @@
+'use client'
 
 import { Signika } from "next/font/google";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const signika = Signika({
     weight: '500',
@@ -8,6 +10,39 @@ const signika = Signika({
 });
 
 const Cards = () => {
+
+    // state to store the cards
+    const [cards, setCards] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Fetch books from backend API
+    useEffect(() => {
+        const fetchCards = async () => {
+            try {
+                const response = await fetch("/api/cards");
+                if(!response.ok) {
+                    throw new Error("Failed to fetch cards");
+                }
+                const data = await response.json();
+                setCards(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCards();
+    }, []);
+
+    if (loading) {
+        return <p>Loading books...</p>;
+      }
+    
+      if (error) {
+        return <p>Error: {error}</p>;
+      }    
+
     return (
         <div className={`${signika.className} container mx-auto items-center justify-center w-full flex flex-col p-8`}>
             <h1 className="text-4xl self-start text-blue-900 my-6">More on sale</h1>
@@ -15,19 +50,8 @@ const Cards = () => {
                 <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
 
                     {
-                        [
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 },
-                            { src: '/tile/colorBook.webp', title: 'Color Books', price: 99 }
-                        ].map((book, index) => (
-                            <li className="w-full h-72 bg-slate-300 relative border-[1px] border-slate-300">
+                        cards.map((book, index) => (
+                            <li key={index} className="w-full h-72 bg-slate-300 relative border-[1px] border-slate-300">
                                 <div className="container relative w-[70%] m-auto h-full bg-black">
                                     <Image src={book.src} fill style={{objectFit:"cover"}} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" alt="image" />
                                 </div>
