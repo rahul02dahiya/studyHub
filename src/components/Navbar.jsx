@@ -7,7 +7,7 @@ const Navbar = () => {
         
         <Link href='/'><li className="hover:text-black">Home</li></Link>
         <Link href='/'><li className="hover:text-black">Shop</li></Link>
-        <Link href='/'><li className="hover:text-black">Contact Us</li></Link>
+        <Link href='#footer'><li className="hover:text-black">Contact Us</li></Link>
       </ul>
     </nav>
   )

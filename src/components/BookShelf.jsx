@@ -63,7 +63,6 @@ const BookShelf = () => {
                 />
               </div>
               <h3 className="text-xl md:text-2xl m-2">{book.title}</h3>
-              <h4 className="text-lg md:text-xl mx-3">{book.price}</h4>
             </li>
           ))}
         </ul>
