@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import CartItem from "@/components/CartItem";
 import Summary from "@/components/Summary";
+import CheckoutForm from "@/components/CheckOutForm";
 import { useState, useEffect } from "react";
 
 const Page = () => {
@@ -53,6 +54,16 @@ const Page = () => {
     localStorage.setItem("cart", JSON.stringify(updatedItems)); // Update localStorage after removal
   };
 
+    const [isFormOpen, setIsFormOpen] = useState(false);
+  
+    const handleCheckoutClick = () => {
+      setIsFormOpen(true);
+    };
+  
+    const handleCloseForm = () => {
+      setIsFormOpen(false);
+    };
+  
 
   return (
     <div>
@@ -70,7 +81,8 @@ const Page = () => {
             />
           ))}
         </div>
-        <Summary total={total} itemCount={cartItems.length} />
+        <Summary total={total} itemCount={cartItems.length} onCheckoutClick={handleCheckoutClick}  />
+        <CheckoutForm isOpen={isFormOpen} onClose={handleCloseForm} />
       </div>
     </div>
   );

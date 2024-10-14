@@ -63,7 +63,7 @@ const Cards = () => {
   }
 
   return (
-    <div className={`${signika.className} container mx-auto items-center justify-center w-full flex flex-col p-8`}>
+    <div id="cards" className={`${signika.className} container mx-auto items-center justify-center w-full flex flex-col p-8`}>
       <h1 className="text-4xl self-start text-blue-900 my-6">More on sale</h1>
       <div className="container h-max w-full m-auto">
         <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
