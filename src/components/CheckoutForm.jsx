@@ -1,13 +1,14 @@
 // /components/CheckoutForm.js
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify"; // Import toast components
+import 'react-toastify/dist/ReactToastify.css'; // Import toast CSS
 
 const CheckoutForm = ({ isOpen, onClose }) => {
     const [errors, setErrors] = useState({});
 
     if (!isOpen) return null;
 
-    // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
 
@@ -23,7 +24,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
             newErrors.name = "Name must be at least 3 characters long.";
         }
 
-        const phonePattern = /^[0-9]{10}$/; // Assume 10 digits for simplicity
+        const phonePattern = /^[0-9]{10}$/;
         if (!phone || !phonePattern.test(phone)) {
             newErrors.phone = "Phone number must be 10 digits long.";
         }
@@ -36,18 +37,49 @@ const CheckoutForm = ({ isOpen, onClose }) => {
             newErrors.address = "Address must be at least 10 characters long.";
         }
 
-        // Check if there are errors
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
-            return; // Prevent form submission if there are errors
+            return;
         }
 
-        // If no errors, clear them and proceed
         setErrors({});
-        alert("Order placed Successfully! You will get a call soon!");
-        e.target.reset(); // Reset the form fields
-        onClose(); // Close the form
-        // Here, you can proceed with form submission, e.g., call API or reset the form
+
+        // Fetch cart data from localStorage
+        const cartData = localStorage.getItem("cart");
+        const totalPay = localStorage.getItem("total");
+
+        // Create a combined payload with form data and cart data
+        const payload = {
+            name,
+            phone,
+            parentsPhone,
+            address,
+            cart: cartData,
+            total: totalPay,
+        };
+
+        // Make a POST request to save data in Google Sheets (or your API)
+        try {
+            const response = await fetch("/api/submitForm", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload), // Send payload with cart data
+            });
+
+            if (response.ok) {
+              e.target.reset(); // Optionally reset the form
+              onClose(); // Close the form modal
+              alert("Order place! We'll connect with you soon");
+              toast.success("Order placed!");
+            } else {
+                toast.error("Error submitting the form. Please try again.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("There was an error submitting the form.");
+        }
     };
 
     return (
@@ -138,6 +170,18 @@ const CheckoutForm = ({ isOpen, onClose }) => {
                         Submit
                     </button>
                 </form>
+
+                {/* Toast Notification Container */}
+                <ToastContainer 
+                  position="top-right" 
+                  autoClose={5000} 
+                  hideProgressBar={false} 
+                  closeOnClick 
+                  draggable 
+                  pauseOnHover 
+                  theme="colored" 
+                  style={{ zIndex: 9999 }} 
+                />
             </div>
         </div>
     );

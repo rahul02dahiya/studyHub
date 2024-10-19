@@ -27,6 +27,7 @@ const Page = () => {
       0
     );
     setTotal(newTotal);
+    localStorage.setItem("total", newTotal);
   };
 
   const handleIncrement = (id) => {
@@ -35,6 +36,8 @@ const Page = () => {
     );
     setCartItems(updatedItems);
     updateTotal(updatedItems);
+    localStorage.setItem("cart", JSON.stringify(updatedItems));
+
   };
 
   const handleDecrement = (id) => {
@@ -45,6 +48,8 @@ const Page = () => {
     );
     setCartItems(updatedItems);
     updateTotal(updatedItems);
+    localStorage.setItem("cart", JSON.stringify(updatedItems));
+
   };
 
   const handleRemove = (id) => {
@@ -71,9 +76,9 @@ const Page = () => {
       <div className="cart-page flex sm:flex-row flex-col">
         <div className="cart-items">
           <h2>Cart - {cartItems.length} items</h2>
-          {cartItems.map((item) => (
+          {cartItems.map((item, index) => (
             <CartItem
-              key={item.id}
+              key={index}
               item={item}
               onIncrement={handleIncrement}
               onDecrement={handleDecrement}
