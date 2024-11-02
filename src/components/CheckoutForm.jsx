@@ -48,12 +48,15 @@ const CheckoutForm = ({ isOpen, onClose }) => {
         const cartData = localStorage.getItem("cart");
         const totalPay = localStorage.getItem("total");
 
+        const orderDateTime = new Date().toLocaleString()
+
         // Create a combined payload with form data and cart data
         const payload = {
             name,
             phone,
             parentsPhone,
             address,
+            orderDateTime: orderDateTime,
             cart: cartData,
             total: totalPay,
         };

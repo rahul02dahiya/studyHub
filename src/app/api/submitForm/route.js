@@ -8,7 +8,7 @@ export async function POST(req) {
     // Parse the request body
     const body = await req.json();
     console.log(body)
-    const { name, phone, parentsPhone, address, cart, total } = body;
+    const { name, phone, parentsPhone, address, orderDateTime, cart, total } = body;
 
     // Load service account credentials
     const keyFilePath = path.join(process.cwd(), '/credentials/study-hub-438918-b47eb0fe9263.json');
@@ -30,7 +30,7 @@ export async function POST(req) {
       range,
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[name, phone, parentsPhone, address, cart, total]],
+        values: [[name, phone, parentsPhone, address, orderDateTime, cart, total]],
       },
     });
 
