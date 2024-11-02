@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import CartItem from "@/components/CartItem";
 import Summary from "@/components/Summary";
-import CheckoutForm from "@/components/CheckOutForm";
+import CheckoutForm from "@/components/CheckoutForm";
 import { useState, useEffect } from "react";
 
 const Page = () => {
