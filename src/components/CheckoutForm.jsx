@@ -74,7 +74,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
             if (response.ok) {
               e.target.reset(); // Optionally reset the form
               onClose(); // Close the form modal
-              alert("Order place! We'll connect with you soon");
+              alert("Order place! We will connect with you soon");
               toast.success("Order placed!");
             } else {
                 toast.error("Error submitting the form. Please try again.");
