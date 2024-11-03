@@ -30,7 +30,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
         }
 
         if (!parentsPhone || !phonePattern.test(parentsPhone)) {
-            newErrors.parentsPhone = "Parents' phone number must be 10 digits long.";
+            newErrors.parentsPhone = "Parent phone number must be 10 digits long.";
         }
 
         if (!address || address.length < 10) {
@@ -135,7 +135,7 @@ const CheckoutForm = ({ isOpen, onClose }) => {
                     {/* Parents' Phone Number */}
                     <div>
                         <label htmlFor="parentsPhone" className="block text-gray-700 font-semibold">
-                            Parents' Phone Number
+                            Parent Phone Number
                         </label>
                         <input
                             type="number"
