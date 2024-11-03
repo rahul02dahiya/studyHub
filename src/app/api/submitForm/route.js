@@ -30,7 +30,7 @@ export async function POST(req) {
       range,
       valueInputOption: "USER_ENTERED",
       requestBody: {
-        values: [[name, phone, parentsPhone, address, orderDateTime, cart, total]],
+        values: [[name, phone, parentsPhone, address, orderDateTime, total, cart]],
       },
     });
 
